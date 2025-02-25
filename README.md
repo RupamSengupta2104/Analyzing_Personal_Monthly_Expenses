@@ -1,19 +1,17 @@
-Analyzing Personal Monthly Expenses
+## Personal Monthly Expenses Analysis
 
-📌 Project Overview
+### Project Overview
 
 This project aims to analyze personal monthly expenses using Python, Pandas, Matplotlib, and Seaborn. It includes:
 
-Loading expense data from a CSV file.
+- Loading expense data from a CSV file.
+- Performing data analysis and visualization.
+- Summarizing total expenses by category and month.
+- Storing results in a structured directory format.
 
-Performing data analysis and visualization.
+### Project Structure
 
-Summarizing total expenses by category and month.
-
-Storing results in a structured directory format.
-
-📂 Project Structure
-
+```
 Analyzing_Personal_Monthly_Expenses/
 │── venv/                 # Virtual environment (excluded from Git)
 │── data/
@@ -25,68 +23,85 @@ Analyzing_Personal_Monthly_Expenses/
 │── .gitignore            # Ignore unnecessary files
 │── requirements.txt      # Required dependencies
 │── README.md             # Project documentation
+```
 
-⚙️ Setup Instructions
+### Setup Instructions
 
-1️⃣ Create Project Folder & Virtual Environment
+#### Create Project Folder & Virtual Environment
 
+```sh
 mkdir Analyzing_Personal_Monthly_Expenses
 cd Analyzing_Personal_Monthly_Expenses
 python -m venv venv
+```
 
-2️⃣ Activate Virtual Environment
+#### Activate Virtual Environment
 
-Windows (CMD): venv\Scripts\activate
+**Windows (CMD):** `venv\Scripts\activate`
 
-Windows (PowerShell): venv\Scripts\Activate.ps1
+**Windows (PowerShell):** `venv\Scripts\Activate.ps1`
 
-Mac/Linux: source venv/bin/activate
+**Mac/Linux:** `source venv/bin/activate`
 
-3️⃣ Install Dependencies
+#### Install Dependencies
 
+```sh
 pip install -r requirements.txt
+```
 
-If requirements.txt is missing, create it:
+If `requirements.txt` is missing, create it:
 
+```sh
 echo "pandas\nmatplotlib\nseaborn" > requirements.txt
+```
 
-📊 Data Preparation
+### Data Preparation
 
 The dataset consists of daily expense records with the following columns:
 
-Date             Category             Description            Amount
-
-2023-10-01       Food                 Groceries              50
-
-2023-10-02       Transportation       Bus fare               5
-
-2023-10-03       Entertainment        Movie tickets          20
+| Date       | Category       | Description    | Amount |
+|------------|----------------|----------------|--------|
+| 2023-10-01 | Food           | Groceries      | 50     |
+| 2023-10-02 | Transportation | Bus fare       | 5      |
+| 2023-10-03 | Entertainment  | Movie tickets  | 20     |
 
 Convert this data into a CSV file:
 
+```python
 import pandas as pd
 
-data = {"Date": [...], "Category": [...], "Description": [...], "Amount": [...]}
+data = {
+    "Date": [...],
+    "Category": [...],
+    "Description": [...],
+    "Amount": [...]
+}
 df = pd.DataFrame(data)
 df.to_csv("data/expenses.csv", index=False)
+```
 
-🛠️ Performing Data Analysis
+### Performing Data Analysis
 
-1️⃣ Load and Inspect Data
+#### Load and Inspect Data
 
+```python
 import pandas as pd
 df = pd.read_csv("data/expenses.csv", parse_dates=["Date"])
 print(df.info())
 print(df.head())
+```
 
-2️⃣ Monthly Expense Summary
+#### Monthly Expense Summary
 
+```python
 df["Month"] = df["Date"].dt.to_period("M")
 monthly_expenses = df.groupby("Month")["Amount"].sum()
 print(monthly_expenses)
+```
 
-3️⃣ Visualization of Expenses
+#### Visualization of Expenses
 
+```python
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -97,23 +112,22 @@ plt.xticks(rotation=45)
 plt.title("Total Expenses by Category")
 plt.savefig("images/expense_plot.png")
 plt.show()
+```
 
-🛑 Prevent CSV from Being Pushed to Git
+### Prevent CSV from Being Pushed to Git
 
-Add this to .gitignore:
+Add this to `.gitignore`:
 
+```
 venv/
 data/expenses.csv
 __pycache__/
+```
 
-This ensures that sensitive financial data is not uploaded to GitHub.
+### Summary
 
-✅ Summary
+- Structured directory for better management.
+- Uses Pandas for data handling.
+- Matplotlib & Seaborn for visualization.
+- Saves results and prevents unwanted files from being committed.
 
-Structured directory for better management.
-
-Uses Pandas for data handling.
-
-Matplotlib & Seaborn for visualization.
-
-Saves results and prevents unwanted files from being committed.
